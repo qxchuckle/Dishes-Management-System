@@ -1,4 +1,3 @@
-//coding:GB2313
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -50,6 +49,9 @@ void sort_score(List *list);      //菜品按评分从高到低排序
 //------------------------------------------------------
 int main() //主函数
 {
+    system("chcp 65001");
+    system("cls");
+    //若中文乱码则删除上面两句
     menu(); //输出功能菜单
     //佛祖开光无bug
     return 0;
