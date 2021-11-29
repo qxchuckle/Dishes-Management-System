@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-// #include <windows.h>
+
 #define SIZE1 100 //名称，价格等字数
 #define SIZE2 200 //限制评价字数
 
@@ -38,6 +38,7 @@ void inquire_one(List *list);           //输出链表指定菜名节点
 void inquire_restaurant(List *list);    //输出链表指定饭店节点
 void inquire_part_price(List *list);    //输出一定价格以下的菜品(这功能。。贫穷)
 void inquire_part_fraction(List *list); //输出一定评分以上的菜品
+void output(Node *p);                   //方便输出
 //文件操作
 void save(List *list);     //保存
 void read_txt(List *list); //读取文件_初始链表
@@ -426,11 +427,7 @@ void inquire_all(List *list) //输出链表全部节点
     for (p = list->head; p; p = p->next)
     {
         printf("\n第%d道菜\n", n);
-        printf("|菜名:%s\n", p->name);
-        printf("|所属:%s\n", p->restaurant);
-        printf("|价格:%.2f\n", p->price);
-        printf("|评分:%d\n", p->fraction);
-        printf("|评价:%s\n", p->comment);
+        output(p);
         n++;
     }
     printf("\n所有菜品查询完毕\n");
@@ -448,11 +445,7 @@ void inquire_one(List *list) //输出指定菜名
     {
         if (!strcmp(a, p->name))
         {
-            printf("\n|菜名:%s\n", p->name);
-            printf("|所属:%s\n", p->restaurant);
-            printf("|价格:%.2f\n", p->price);
-            printf("|评分:%d\n", p->fraction);
-            printf("|评价:%s\n", p->comment);
+            output(p);
             n++;
         }
     }
@@ -471,12 +464,7 @@ void inquire_restaurant(List *list) //输出指定饭店所有菜品
     {
         if (!strcmp(a, p->restaurant))
         {
-            printf("\n");
-            printf("|菜名:%s\n", p->name);
-            printf("|所属:%s\n", p->restaurant);
-            printf("|价格:%.2f\n", p->price);
-            printf("|评分:%d\n", p->fraction);
-            printf("|评价:%s\n", p->comment);
+            output(p);
             n++;
         }
     }
@@ -496,11 +484,7 @@ void inquire_part_price(List *list) //输出一定价格以下的菜品(这功�
     {
         if (p->price <= money)
         {
-            printf("\n|菜名:%s\n", p->name);
-            printf("|所属:%s\n", p->restaurant);
-            printf("|价格:%.2f\n", p->price);
-            printf("|评分:%d\n", p->fraction);
-            printf("|评价:%s\n", p->comment);
+            output(p);
             n++;
         }
     }
@@ -520,16 +504,20 @@ void inquire_part_fraction(List *list) //输出一定评分以上的菜品
     {
         if (p->fraction >= score)
         {
-            printf("\n|菜名:%s\n", p->name);
-            printf("|所属:%s\n", p->restaurant);
-            printf("|价格:%.2f\n", p->price);
-            printf("|评分:%d\n", p->fraction);
-            printf("|评价:%s\n", p->comment);
+            output(p);
             n++;
         }
     }
     printf("\n共查找到%d道菜\n", n);
     system("pause");
+}
+void output(Node *p) //方便输出
+{
+    printf("\n|菜名:%s\n", p->name);
+    printf("|所属:%s\n", p->restaurant);
+    printf("|价格:%.2f\n", p->price);
+    printf("|评分:%d\n", p->fraction);
+    printf("|评价:%s\n", p->comment);
 }
 //文件操作
 void save(List *list) //保存
