@@ -4,10 +4,7 @@
 
 请使用GB2313或GBK编码打开源文件，使用UTF8编码会有bug
 
-联系方式: 邮箱1934009145@qq.com 酷安@TheChuckle
-
-开源地址https://github.com/qxchuckle/Dishes-Management-System
-
+酷安@TheChuckle
 
 更新日志：
 
