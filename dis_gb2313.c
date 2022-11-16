@@ -8,81 +8,81 @@
 #include <time.h>
 #include <windows.h>
 
-#define SIZE1 100 //Ãû³Æ£¬¼Û¸ñµÈ×ÖÊı
-#define SIZE2 200 //ÏŞÖÆÆÀ¼Û×ÖÊı
+#define SIZE1 100 //åç§°ï¼Œä»·æ ¼ç­‰å­—æ•°
+#define SIZE2 200 //é™åˆ¶è¯„ä»·å­—æ•°
 
 typedef struct _node
-{							//Á´±íµÄ½Úµã½á¹¹Ìå
-	char name[SIZE1];		//²ËÆ·Ãû³Æ
-	char restaurant[SIZE1]; //·¹µêÃû×Ö
-	float price;			//²ËµÄ¼Û¸ñ
-	int fraction;			//²ËµÄÆÀ·Ö
-	char comment[SIZE2];	//²ËÆ·ÆÀ¼Û
+{							//é“¾è¡¨çš„èŠ‚ç‚¹ç»“æ„ä½“
+	char name[SIZE1];		//èœå“åç§°
+	char restaurant[SIZE1]; //é¥­åº—åå­—
+	float price;			//èœçš„ä»·æ ¼
+	int fraction;			//èœçš„è¯„åˆ†
+	char comment[SIZE2];	//èœå“è¯„ä»·
 	struct _node *next;
 } Node;
-typedef struct _list //·½±ã¶ÔÁ´±í²Ù×÷
+typedef struct _list //æ–¹ä¾¿å¯¹é“¾è¡¨æ“ä½œ
 {
 	Node *head;
 	Node *pa;
 	Node *pb;
 	Node *pc;
 } List;
-//²Ëµ¥
-void menu(void);			   //Ò»¼¶²Ëµ¥
-void menu_inquire(List *list); //¶ş¼¶²Ëµ¥_²éÑ¯²Ëµ¥
-void help(void);			   //¶ş¼¶²Ëµ¥_°ïÖú²Ëµ¥
-int menu_sort(List *list);	   //Èı¼¶²Ëµ¥_ÅÅĞò·½·¨
-//¶Ô½Úµã²Ù×÷
-void add(List *list);	  //Ìí¼Ó½Úµã
-void delete (List *list); //É¾³ı½Úµã
-void revise(List *list);  //ĞŞ¸Ä½Úµã
-//°²È«ÊäÈë
-char *s_gets(char *st, int n); //°²È«ÊäÈë×Ö·û
-int get_int(void);			   //°²È«ÊäÈëintĞÍ
-float get_float(void);		   //°²È«ÊäÈëfloatĞÍ
-//Á´±íµÄÊä³öºÍ²Ù×÷
-void inquire_all(List *list);			//Êä³öÁ´±íÈ«²¿½Úµã
-void inquire_one(List *list);			//Êä³öÁ´±íÖ¸¶¨²ËÃû½Úµã
-void inquire_restaurant(List *list);	//Êä³öÁ´±íÖ¸¶¨·¹µê½Úµã
-void inquire_part_price(List *list);	//Êä³öÒ»¶¨¼Û¸ñÒÔÏÂµÄ²ËÆ·(Õâ¹¦ÄÜ¡£¡£Æ¶Çî)
-void inquire_part_fraction(List *list); //Êä³öÒ»¶¨ÆÀ·ÖÒÔÉÏµÄ²ËÆ·
-void average_percentage(List *list);	//²éÑ¯Ä³·¹µê»òÊ³ÌÃµÄÆ½¾ù¼Û¸ñºÍÆÀ·Ö
-void output(Node *p);					//·½±ãÊä³ö
-void random_menu(List *list);			//Ëæ»úÊä³öÒ»µÀ²Ë
-void empty(List *list);					//Çå¿ÕÁ´±í
-//ÎÄ¼ş²Ù×÷
-void save(List *list);	   //±£´æ
-void read_txt(List *list); //¶ÁÈ¡ÎÄ¼ş_³õÊ¼Á´±í
-//µ¥Á´±íµÄÅÅĞò
-void sort_ascending(List *list);		 //²ËÆ·°´¼Û¸ñ´ÓµÍµ½¸ßÅÅĞò
-void sort_descending(List *list);		 //²ËÆ·°´¼Û¸ñ´Ó¸ßµ½µÍÅÅĞò
-void sort_score(List *list);			 //²ËÆ·°´ÆÀ·Ö´Ó¸ßµ½µÍÅÅĞò
-int calculate(List *list);				 //¼ÆËã³öµ¥Á´±íµÄ½Úµã¸öÊı
-void swap1(List *list, List *list_swap); //µ¥Á´±íÃ°ÅİÅÅĞòµÄËã·¨¿é1
-void swap2(List *list, List *list_swap); //µ¥Á´±íÃ°ÅİÅÅĞòµÄËã·¨¿é2
-//ÆäËû
-int random_number(List *list); //Ëæ»úÉú³É²»´óÓÚ½ÚµãÊıµÄÕûÊı
-void color(int a);			   //¿ØÖÆÌ¨ÎÄ±¾ÑÕÉ«
+//èœå•
+void menu(void);			   //ä¸€çº§èœå•
+void menu_inquire(List *list); //äºŒçº§èœå•_æŸ¥è¯¢èœå•
+void help(void);			   //äºŒçº§èœå•_å¸®åŠ©èœå•
+int menu_sort(List *list);	   //ä¸‰çº§èœå•_æ’åºæ–¹æ³•
+//å¯¹èŠ‚ç‚¹æ“ä½œ
+void add(List *list);	  //æ·»åŠ èŠ‚ç‚¹
+void delete (List *list); //åˆ é™¤èŠ‚ç‚¹
+void revise(List *list);  //ä¿®æ”¹èŠ‚ç‚¹
+//å®‰å…¨è¾“å…¥
+char *s_gets(char *st, int n); //å®‰å…¨è¾“å…¥å­—ç¬¦
+int get_int(void);			   //å®‰å…¨è¾“å…¥intå‹
+float get_float(void);		   //å®‰å…¨è¾“å…¥floatå‹
+//é“¾è¡¨çš„è¾“å‡ºå’Œæ“ä½œ
+void inquire_all(List *list);			//è¾“å‡ºé“¾è¡¨å…¨éƒ¨èŠ‚ç‚¹
+void inquire_one(List *list);			//è¾“å‡ºé“¾è¡¨æŒ‡å®šèœåèŠ‚ç‚¹
+void inquire_restaurant(List *list);	//è¾“å‡ºé“¾è¡¨æŒ‡å®šé¥­åº—èŠ‚ç‚¹
+void inquire_part_price(List *list);	//è¾“å‡ºä¸€å®šä»·æ ¼ä»¥ä¸‹çš„èœå“(è¿™åŠŸèƒ½ã€‚ã€‚è´«ç©·)
+void inquire_part_fraction(List *list); //è¾“å‡ºä¸€å®šè¯„åˆ†ä»¥ä¸Šçš„èœå“
+void average_percentage(List *list);	//æŸ¥è¯¢æŸé¥­åº—æˆ–é£Ÿå ‚çš„å¹³å‡ä»·æ ¼å’Œè¯„åˆ†
+void output(Node *p);					//æ–¹ä¾¿è¾“å‡º
+void random_menu(List *list);			//éšæœºè¾“å‡ºä¸€é“èœ
+void empty(List *list);					//æ¸…ç©ºé“¾è¡¨
+//æ–‡ä»¶æ“ä½œ
+void save(List *list);	   //ä¿å­˜
+void read_txt(List *list); //è¯»å–æ–‡ä»¶_åˆå§‹é“¾è¡¨
+//å•é“¾è¡¨çš„æ’åº
+void sort_ascending(List *list);		 //èœå“æŒ‰ä»·æ ¼ä»ä½åˆ°é«˜æ’åº
+void sort_descending(List *list);		 //èœå“æŒ‰ä»·æ ¼ä»é«˜åˆ°ä½æ’åº
+void sort_score(List *list);			 //èœå“æŒ‰è¯„åˆ†ä»é«˜åˆ°ä½æ’åº
+int calculate(List *list);				 //è®¡ç®—å‡ºå•é“¾è¡¨çš„èŠ‚ç‚¹ä¸ªæ•°
+void swap1(List *list, List *list_swap); //å•é“¾è¡¨å†’æ³¡æ’åºçš„ç®—æ³•å—1
+void swap2(List *list, List *list_swap); //å•é“¾è¡¨å†’æ³¡æ’åºçš„ç®—æ³•å—2
+//å…¶ä»–
+int random_number(List *list); //éšæœºç”Ÿæˆä¸å¤§äºèŠ‚ç‚¹æ•°çš„æ•´æ•°
+void color(int a);			   //æ§åˆ¶å°æ–‡æœ¬é¢œè‰²
 //______________________________________________________
 //------------------------------------------------------
-int main() //Ö÷º¯Êı
+int main() //ä¸»å‡½æ•°
 {
 	//system("chcp 65001");//GB2313
 	//system("chcp 936");//UTF8
 	//system("cls");
-	menu(); //Êä³ö¹¦ÄÜ²Ëµ¥
-	//·ğ×æ¿ª¹âÎŞbug
+	menu(); //è¾“å‡ºåŠŸèƒ½èœå•
+	//ä½›ç¥–å¼€å…‰æ— bug
 	return 0;
 }
-//²Ëµ¥
-void menu() //Ò»¼¶²Ëµ¥
+//èœå•
+void menu() //ä¸€çº§èœå•
 {
 	int options, z = 1;
 	List list;
-	list.head = NULL;				   //headÖ¸Ïò¿Õ£¬Á´±í²»´æÔÚ
-	FILE *fp = fopen("Menu.txt", "a"); //ÈôÎŞMenu.txtÎÄ¼ş£¬Ôò´´½¨Ò»¸ö
+	list.head = NULL;				   //headæŒ‡å‘ç©ºï¼Œé“¾è¡¨ä¸å­˜åœ¨
+	FILE *fp = fopen("Menu.txt", "a"); //è‹¥æ— Menu.txtæ–‡ä»¶ï¼Œåˆ™åˆ›å»ºä¸€ä¸ª
 	fclose(fp);
-	read_txt(&list); //¶ÁÈëtxtÖĞµÄÊı¾İ£¬³õÊ¼»¯Á´±í
+	read_txt(&list); //è¯»å…¥txtä¸­çš„æ•°æ®ï¼Œåˆå§‹åŒ–é“¾è¡¨
 	while (z)
 	{
 		system("cls");
@@ -90,39 +90,39 @@ void menu() //Ò»¼¶²Ëµ¥
 		color(2);
 		printf("|-----------------------------------------------------\n");
 		color(14);
-		printf("|          ¹ã¶«º£Ñó´óÑ§¡¤Ñô½­Ğ£Çø¡¤²ËÆ·ĞÅÏ¢ÏµÍ³             \n");
+		printf("|                     èœå“ä¿¡æ¯ç³»ç»Ÿ             \n");
 		color(2);
 		printf("|-----------------------------------------------------\n");
 		color(11);
-		printf("|********************ÏµÍ³¹¦ÄÜ²Ëµ¥*********************\n");
+		printf("|********************ç³»ç»ŸåŠŸèƒ½èœå•*********************\n");
 		color(2);
 		printf("|-----------------------------------------------------\n");
 		color(15);
-		printf("|*******************|1¡¢Ê¹ÓÃ°ïÖú|                       \n");
-		printf("|*******************|2¡¢Ìí¼Ó²ËÆ·ĞÅÏ¢|                    \n");
-		printf("|*******************|3¡¢É¾³ı²ËÆ·ĞÅÏ¢|                    \n");
-		printf("|*******************|4¡¢²éÑ¯²ËÆ·ĞÅÏ¢|                    \n");
-		printf("|*******************|5¡¢ĞŞ¸Ä²ËÆ·ĞÅÏ¢|                    \n");
-		printf("|*******************|6¡¢½ñÌì³ÔÊ²Ã´|                     \n");
-		printf("|*******************|7¡¢Çå¿ÕËùÓĞÊı¾İ|                     \n");
-		printf("|*******************|8¡¢±£´æ|\n");
+		printf("|*******************|1ã€ä½¿ç”¨å¸®åŠ©|                       \n");
+		printf("|*******************|2ã€æ·»åŠ èœå“ä¿¡æ¯|                    \n");
+		printf("|*******************|3ã€åˆ é™¤èœå“ä¿¡æ¯|                    \n");
+		printf("|*******************|4ã€æŸ¥è¯¢èœå“ä¿¡æ¯|                    \n");
+		printf("|*******************|5ã€ä¿®æ”¹èœå“ä¿¡æ¯|                    \n");
+		printf("|*******************|6ã€ä»Šå¤©åƒä»€ä¹ˆ|                     \n");
+		printf("|*******************|7ã€æ¸…ç©ºæ‰€æœ‰æ•°æ®|                     \n");
+		printf("|*******************|8ã€ä¿å­˜|\n");
 		color(2);
 		printf("|-----------------------------------------------------\n");
 		color(15);
-		printf("|*******************|0¡¢ÍË³öÏµÍ³|                       \n");
+		printf("|*******************|0ã€é€€å‡ºç³»ç»Ÿ|                       \n");
 		color(12);
-		printf("|!!!Ç°ÇëÏÈ±£´æÔÙÍË³öÏµÍ³,·ñÔòÊı¾İ»á¶ªÊ§!!!\n");
+		printf("|!!!å‰è¯·å…ˆä¿å­˜å†é€€å‡ºç³»ç»Ÿ,å¦åˆ™æ•°æ®ä¼šä¸¢å¤±!!!\n");
 		color(2);
 		printf("|-----------------------------------------------------\n");
 		color(11);
-		printf("ÇëÊäÈë¹¦ÄÜĞòºÅ£º");
+		printf("è¯·è¾“å…¥åŠŸèƒ½åºå·ï¼š");
 		color(15);
 		options = get_int();
 		switch (options)
 		{
 		case 0:
-			z = 0; //Ìø³öÑ­»·
-			printf("¼´½«ÍË³öÏµÍ³¡£\n");
+			z = 0; //è·³å‡ºå¾ªç¯
+			printf("å³å°†é€€å‡ºç³»ç»Ÿã€‚\n");
 			break;
 		case 1:
 			help();
@@ -150,7 +150,7 @@ void menu() //Ò»¼¶²Ëµ¥
 			break;
 		default:
 			color(12);
-			printf("ÎŞ¸Ã¹¦ÄÜ£¬ÇëÖØĞÂÊäÈë\n");
+			printf("æ— è¯¥åŠŸèƒ½ï¼Œè¯·é‡æ–°è¾“å…¥\n");
 			color(11);
 			system("pause");
 			color(15);
@@ -158,37 +158,37 @@ void menu() //Ò»¼¶²Ëµ¥
 	}
 	system("pause");
 }
-void help() //¶ş¼¶²Ëµ¥_°ïÖú²Ëµ¥
+void help() //äºŒçº§èœå•_å¸®åŠ©èœå•
 {
 	system("cls");
 	printf("\n");
 	color(2);
 	printf("|-----------------------------------------------------------------\n");
 	color(15);
-	printf("|Ê¹ÓÃ°ïÖú£º\n");
-	printf("|1¡¢±¾²ËÆ·ĞÅÏ¢ÏµÍ³¿É¹©ÓÃ»§×ÔĞĞĞŞ¸ÄÄÚÈİ\n");
-	printf("|2¡¢ÒòÎª¿¼ÂÇµ½²»Í¬·¹µêÓĞÍ¬ÑùÃû³ÆµÄ²ËÆ·£¬±¾ÏµÍ³ÔÊĞí²ËÆ·Ãû³ÆÓĞÖØ¸´\n");
-	printf("|3¡¢ÇëÎğÊäÈë´íÎóĞÅÏ¢£¬ÒÔÃâÔì³É³ÌĞò³ö´í\n");
-	printf("|4¡¢¹Ø±ÕÏµÍ³Ç°¼ÇµÃ±£´æ£¡·ñÔòÊı¾İ»á¶ªÊ§\n");
-	printf("|5¡¢ÓĞbugÁªÏµ1934009145@qq.com\n");
-	printf("|6¡¢¿ªÔ´µØÖ·:github.com/qxchuckle/Dishes-Management-System\n");
+	printf("|ä½¿ç”¨å¸®åŠ©ï¼š\n");
+	printf("|1ã€æœ¬èœå“ä¿¡æ¯ç³»ç»Ÿå¯ä¾›ç”¨æˆ·è‡ªè¡Œä¿®æ”¹å†…å®¹\n");
+	printf("|2ã€å› ä¸ºè€ƒè™‘åˆ°ä¸åŒé¥­åº—æœ‰åŒæ ·åç§°çš„èœå“ï¼Œæœ¬ç³»ç»Ÿå…è®¸èœå“åç§°æœ‰é‡å¤\n");
+	printf("|3ã€è¯·å‹¿è¾“å…¥é”™è¯¯ä¿¡æ¯ï¼Œä»¥å…é€ æˆç¨‹åºå‡ºé”™\n");
+	printf("|4ã€å…³é—­ç³»ç»Ÿå‰è®°å¾—ä¿å­˜ï¼å¦åˆ™æ•°æ®ä¼šä¸¢å¤±\n");
+	printf("|5ã€æœ‰bugè”ç³»1934009145@qq.com\n");
+	printf("|6ã€å¼€æºåœ°å€:github.com/qxchuckle/Dishes-Management-System\n");
 	color(2);
 	printf("|-----------------------------------------------------------------\n");
 	printf("\n");
 	color(11);
 	system("pause");
 }
-void menu_inquire(List *list) //¶ş¼¶²Ëµ¥_²éÑ¯²Ëµ¥
+void menu_inquire(List *list) //äºŒçº§èœå•_æŸ¥è¯¢èœå•
 {
 	int options, z = 1;
-	List *p = list;			//·½±ã´«½á¹¹ÌåÖ¸Õë
-	if (list->head == NULL) //ÅĞ¶ÏÁ´±íÊÇ·ñÎª¿Õ
+	List *p = list;			//æ–¹ä¾¿ä¼ ç»“æ„ä½“æŒ‡é’ˆ
+	if (list->head == NULL) //åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©º
 	{
 		color(12);
-		printf("»¹Î´´æÈëÈÎºÎ²ËÆ·£¡ÎŞ·¨²éÑ¯£¡\n");
+		printf("è¿˜æœªå­˜å…¥ä»»ä½•èœå“ï¼æ— æ³•æŸ¥è¯¢ï¼\n");
 		color(11);
 		system("pause");
-		return; //Îª¿Õ½áÊøº¯Êı
+		return; //ä¸ºç©ºç»“æŸå‡½æ•°
 	}
 	while (z)
 	{
@@ -197,17 +197,17 @@ void menu_inquire(List *list) //¶ş¼¶²Ëµ¥_²éÑ¯²Ëµ¥
 		color(2);
 		printf("|-----------------------------------------------------\n");
 		color(15);
-		printf("|1¡¢²éÑ¯È«²¿²ËÆ·ĞÅÏ¢\n");
-		printf("|2¡¢°´²ËÃû²éÑ¯²ËÆ·ĞÅÏ¢\n");
-		printf("|3¡¢²éÑ¯·¹µê»òÊ³ÌÃµÄÈ«²¿²ËÆ·ĞÅÏ¢\n");
-		printf("|4¡¢²éÑ¯Ä³¼Û¸ñÒÔÏÂµÄÈ«²¿²ËÆ·\n");
-		printf("|5¡¢²éÑ¯Ä³ÆÀ·ÖÒÔÉÏµÄÈ«²¿²ËÆ·\n");
-		printf("|6¡¢²éÑ¯Ä³·¹µê»òÊ³ÌÃµÄÆ½¾ù¼Û¸ñ¡¢ÆÀ·ÖºÍ¼Û¸ñÇø¼äÕ¼±È\n");
-		printf("|0¡¢·µ»ØÖ÷²Ëµ¥\n");
+		printf("|1ã€æŸ¥è¯¢å…¨éƒ¨èœå“ä¿¡æ¯\n");
+		printf("|2ã€æŒ‰èœåæŸ¥è¯¢èœå“ä¿¡æ¯\n");
+		printf("|3ã€æŸ¥è¯¢é¥­åº—æˆ–é£Ÿå ‚çš„å…¨éƒ¨èœå“ä¿¡æ¯\n");
+		printf("|4ã€æŸ¥è¯¢æŸä»·æ ¼ä»¥ä¸‹çš„å…¨éƒ¨èœå“\n");
+		printf("|5ã€æŸ¥è¯¢æŸè¯„åˆ†ä»¥ä¸Šçš„å…¨éƒ¨èœå“\n");
+		printf("|6ã€æŸ¥è¯¢æŸé¥­åº—æˆ–é£Ÿå ‚çš„å¹³å‡ä»·æ ¼ã€è¯„åˆ†å’Œä»·æ ¼åŒºé—´å æ¯”\n");
+		printf("|0ã€è¿”å›ä¸»èœå•\n");
 		color(2);
 		printf("|-----------------------------------------------------\n");
 		color(11);
-		printf("ÇëÊäÈë¹¦ÄÜĞòºÅ£º");
+		printf("è¯·è¾“å…¥åŠŸèƒ½åºå·ï¼š");
 		color(15);
 		options = get_int();
 		switch (options)
@@ -239,13 +239,13 @@ void menu_inquire(List *list) //¶ş¼¶²Ëµ¥_²éÑ¯²Ëµ¥
 			return;
 		default:
 			color(12);
-			printf("ÎŞ¸Ã¹¦ÄÜ£¬ÇëÖØĞÂÊäÈë\n");
+			printf("æ— è¯¥åŠŸèƒ½ï¼Œè¯·é‡æ–°è¾“å…¥\n");
 			color(11);
 			system("pause");
 		}
 	}
 }
-int menu_sort(List *list) //Èı¼¶²Ëµ¥_ÅÅĞò·½·¨
+int menu_sort(List *list) //ä¸‰çº§èœå•_æ’åºæ–¹æ³•
 {
 	int options, z = 1, n = 1;
 	List *p = list;
@@ -256,15 +256,15 @@ int menu_sort(List *list) //Èı¼¶²Ëµ¥_ÅÅĞò·½·¨
 		color(2);
 		printf("|-----------------------------------------------------\n");
 		color(15);
-		printf("|1¡¢°´¼Û¸ñ´ÓµÍµ½¸ßÅÅĞò\n");
-		printf("|2¡¢°´¼Û¸ñ´Ó¸ßµ½µÍÅÅĞò\n");
-		printf("|3¡¢°´ÆÀ·Ö´Ó¸ßµ½µÍÅÅĞò\n");
-		printf("|4¡¢²»ÅÅĞò\n");
-		printf("|0¡¢·µ»ØÖ÷²Ëµ¥\n");
+		printf("|1ã€æŒ‰ä»·æ ¼ä»ä½åˆ°é«˜æ’åº\n");
+		printf("|2ã€æŒ‰ä»·æ ¼ä»é«˜åˆ°ä½æ’åº\n");
+		printf("|3ã€æŒ‰è¯„åˆ†ä»é«˜åˆ°ä½æ’åº\n");
+		printf("|4ã€ä¸æ’åº\n");
+		printf("|0ã€è¿”å›ä¸»èœå•\n");
 		color(2);
 		printf("|-----------------------------------------------------\n");
 		color(11);
-		printf("ÇëÊäÈë¹¦ÄÜĞòºÅ£º");
+		printf("è¯·è¾“å…¥åŠŸèƒ½åºå·ï¼š");
 		color(15);
 		options = get_int();
 		switch (options)
@@ -285,51 +285,51 @@ int menu_sort(List *list) //Èı¼¶²Ëµ¥_ÅÅĞò·½·¨
 			return n;
 		default:
 			color(12);
-			printf("ÎŞ¸Ã¹¦ÄÜ£¬ÇëÖØĞÂÊäÈë\n");
+			printf("æ— è¯¥åŠŸèƒ½ï¼Œè¯·é‡æ–°è¾“å…¥\n");
 			color(11);
 			system("pause");
 			color(15);
 		}
 	}
 }
-//¶Ô½Úµã²Ù×÷
-void add(List *list) //Ìí¼Ó½Úµã
+//å¯¹èŠ‚ç‚¹æ“ä½œ
+void add(List *list) //æ·»åŠ èŠ‚ç‚¹
 {
 	float k = 1;
 	int n = 0, i = 0;
 	Node *last = list->head;
-	Node *p1 = (Node *)malloc(sizeof(Node)), *p; //¸ø½Úµã·ÖÅä¿Õ¼ä
+	Node *p1 = (Node *)malloc(sizeof(Node)), *p; //ç»™èŠ‚ç‚¹åˆ†é…ç©ºé—´
 	p1->next = NULL;
 	system("cls");
-	puts("¿ªÊ¼Â¼Èë²ËÆ·£º\n----------------\n");
-	puts("ÇëÊäÈë²ËÆ·Ãû³Æ£º");
+	puts("å¼€å§‹å½•å…¥èœå“ï¼š\n----------------\n");
+	puts("è¯·è¾“å…¥èœå“åç§°ï¼š");
 	do
 	{
 		s_gets(p1->name, SIZE1);
 	} while (strlen(p1->name) == 0);
-	puts("ÇëÊäÈë²ËÆ·ËùÊô·¹µêorÊ³ÌÃÃû³Æ£º");
+	puts("è¯·è¾“å…¥èœå“æ‰€å±é¥­åº—oré£Ÿå ‚åç§°ï¼š");
 	do
 	{
 		s_gets(p1->restaurant, SIZE1);
 	} while (strlen(p1->restaurant) == 0);
-	for (p = list->head; p; p = p->next) //±éÀúÁ´±í
+	for (p = list->head; p; p = p->next) //éå†é“¾è¡¨
 	{
 		if (!(strcmp(p1->name, p->name) || strcmp(p1->restaurant, p->restaurant)))
 		{
 			color(12);
-			printf("¸Ã·¹µê/Ê³ÌÃÄÚÒÑ´æÔÚÍ¬Ãû²ËÆ·£¡\n");
+			printf("è¯¥é¥­åº—/é£Ÿå ‚å†…å·²å­˜åœ¨åŒåèœå“ï¼\n");
 			color(11);
 			system("pause");
 			return;
 		}
 	}
-	puts("ÇëÊäÈë²ËÆ·µÄ¼Û¸ñ£º");
+	puts("è¯·è¾“å…¥èœå“çš„ä»·æ ¼ï¼š");
 	p1->price = get_float();
-	puts("ÇëÊäÈë0-10µÄÕûÊı¶Ô²ËÆ·½øĞĞÆÀ·Ö£º");
+	puts("è¯·è¾“å…¥0-10çš„æ•´æ•°å¯¹èœå“è¿›è¡Œè¯„åˆ†ï¼š");
 	do
 	{
 		n = get_int();
-		if (n >= 0 && n <= 10) //ÅĞ¶ÏÆÀ·ÖÊÇ·ñÊÇ0-10
+		if (n >= 0 && n <= 10) //åˆ¤æ–­è¯„åˆ†æ˜¯å¦æ˜¯0-10
 		{
 			p1->fraction = n;
 			i = 1;
@@ -337,107 +337,107 @@ void add(List *list) //Ìí¼Ó½Úµã
 		else
 		{
 			color(12);
-			puts("ÆÀ·Ö²»ÔÚ¹æ¶¨·¶Î§ÄÚ£¬ÇëÖØĞÂÊäÈë£º");
+			puts("è¯„åˆ†ä¸åœ¨è§„å®šèŒƒå›´å†…ï¼Œè¯·é‡æ–°è¾“å…¥ï¼š");
 			color(15);
 		}
 	} while (!i);
-	puts("Çë¶Ô²ËÆ·½øĞĞÆÀ¼Û£º");
+	puts("è¯·å¯¹èœå“è¿›è¡Œè¯„ä»·ï¼š");
 	do
 	{
 		s_gets(p1->comment, SIZE2);
 	} while (strlen(p1->comment) == 0);
-	if (last) //Èç¹ûlastÓĞÖµ£¬ÔòËµÃ÷headÒÑÖ¸ÏòÁ´±íµÚÒ»¸ö½Úµã
+	if (last) //å¦‚æœlastæœ‰å€¼ï¼Œåˆ™è¯´æ˜headå·²æŒ‡å‘é“¾è¡¨ç¬¬ä¸€ä¸ªèŠ‚ç‚¹
 	{
 		while (last->next)
 		{
-			last = last->next; //lastÊ¼ÖÕÖ¸Ïò×îºóÒ»¸ö½Úµã
+			last = last->next; //lastå§‹ç»ˆæŒ‡å‘æœ€åä¸€ä¸ªèŠ‚ç‚¹
 		}
-		last->next = p1; //ÔÚ×îºóÒ»¸ö½ÚµãºóÃæÔÙ¼ÓÒ»¸ö½Úµã
+		last->next = p1; //åœ¨æœ€åä¸€ä¸ªèŠ‚ç‚¹åé¢å†åŠ ä¸€ä¸ªèŠ‚ç‚¹
 	}
 	else
 	{
-		list->head = p1; //Èç¹ûlastÎªNULL£¬ÔòÒª½«headÖ¸ÏòµÚÒ»¸ö½Úµã
+		list->head = p1; //å¦‚æœlastä¸ºNULLï¼Œåˆ™è¦å°†headæŒ‡å‘ç¬¬ä¸€ä¸ªèŠ‚ç‚¹
 	}
 	color(11);
-	puts("Â¼Èë³É¹¦£¡");
+	puts("å½•å…¥æˆåŠŸï¼");
 	system("pause");
 }
-void delete (List *list) //É¾³ı½Úµã
+void delete (List *list) //åˆ é™¤èŠ‚ç‚¹
 {
 	int n = 0;
 	char a[SIZE1];
 	char b[SIZE1];
 	Node *p, *q;
 	if (list->head == NULL)
-	{ //ÅĞ¶ÏÁ´±íÊÇ·ñÎª¿Õ
-		printf("»¹Î´´æÈëÈÎºÎ²ËÆ·£¡É¾³ıÊ§°Ü£¡\n");
+	{ //åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©º
+		printf("è¿˜æœªå­˜å…¥ä»»ä½•èœå“ï¼åˆ é™¤å¤±è´¥ï¼\n");
 		system("pause");
 		return;
 	}
 	system("cls");
-	printf("ÇëÊäÈëÄãÒªÉ¾³ıµÄ²ËÆ·Ãû³Æ£º");
+	printf("è¯·è¾“å…¥ä½ è¦åˆ é™¤çš„èœå“åç§°ï¼š");
 	s_gets(a, SIZE1);
-	printf("ÇëÊäÈë²ËÆ·ËùÊô·¹µêÃû³Æ£º");
+	printf("è¯·è¾“å…¥èœå“æ‰€å±é¥­åº—åç§°ï¼š");
 	s_gets(b, SIZE1);
 	for (q = NULL, p = list->head; p; q = p, p = p->next)
-	{														   //±éÀúÁ´±í
-		if (!(strcmp(a, p->name) || strcmp(b, p->restaurant))) //ÅĞ¶ÏÊÇ·ñÕÒµ½ÒªĞŞ¸ÄµÄ½Úµã
+	{														   //éå†é“¾è¡¨
+		if (!(strcmp(a, p->name) || strcmp(b, p->restaurant))) //åˆ¤æ–­æ˜¯å¦æ‰¾åˆ°è¦ä¿®æ”¹çš„èŠ‚ç‚¹
 		{
-			n++;   //¼ÇÂ¼ÕÒµ½ÁË
-			if (q) //ÅĞ¶ÏÕÒµ½µÄÊÇ²»ÊÇµÚÒ»¸ö½Úµã
+			n++;   //è®°å½•æ‰¾åˆ°äº†
+			if (q) //åˆ¤æ–­æ‰¾åˆ°çš„æ˜¯ä¸æ˜¯ç¬¬ä¸€ä¸ªèŠ‚ç‚¹
 			{
-				q->next = p->next; //ÈÃ¸Ã½ÚµãµÄÇ°Ò»¸ö½Úµã¶¼nextÖ¸ÏòºóÒ»¸ö½Úµã
+				q->next = p->next; //è®©è¯¥èŠ‚ç‚¹çš„å‰ä¸€ä¸ªèŠ‚ç‚¹éƒ½nextæŒ‡å‘åä¸€ä¸ªèŠ‚ç‚¹
 			}
 			else
 			{
-				list->head = p->next; //ÈÃheadµÄnextÖ¸ÏòºóÒ»¸ö½Úµã
+				list->head = p->next; //è®©headçš„nextæŒ‡å‘åä¸€ä¸ªèŠ‚ç‚¹
 			}
 		}
 	}
 	if (!n)
 	{
-		printf("\nÃ»ÓĞÕâµÀ²Ë£¡\n");
+		printf("\næ²¡æœ‰è¿™é“èœï¼\n");
 	}
 	else
 	{
-		printf("\nÉ¾³ı³É¹¦%dµÀ²Ë¡£\n", n);
+		printf("\nåˆ é™¤æˆåŠŸ%dé“èœã€‚\n", n);
 	}
 	color(11);
 	system("pause");
 }
-void revise(List *list) //ĞŞ¸Ä½Úµã
+void revise(List *list) //ä¿®æ”¹èŠ‚ç‚¹
 {
 	float k = 1;
 	int n = 0, m = 0, i = 0;
 	char a[SIZE1];
 	char b[SIZE1];
 	Node *p, *q;
-	if (list->head == NULL) //ÅĞ¶ÏÁ´±íÊÇ·ñÎª¿Õ
+	if (list->head == NULL) //åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©º
 	{
-		printf("»¹Î´´æÈëÈÎºÎ²ËÆ·£¡ÎŞ·¨ĞŞ¸Ä£¡\n");
+		printf("è¿˜æœªå­˜å…¥ä»»ä½•èœå“ï¼æ— æ³•ä¿®æ”¹ï¼\n");
 		system("pause");
 		return;
 	}
 	system("cls");
-	printf("ÇëÊäÈëÒªĞŞ¸ÄµÄ²ËÆ·µÄÃû³Æ£º");
+	printf("è¯·è¾“å…¥è¦ä¿®æ”¹çš„èœå“çš„åç§°ï¼š");
 	s_gets(a, SIZE1);
-	printf("ÇëÊäÈë²ËÆ·ËùÊô·¹µêÃû³Æ£º");
+	printf("è¯·è¾“å…¥èœå“æ‰€å±é¥­åº—åç§°ï¼š");
 	s_gets(b, SIZE1);
-	for (q = NULL, p = list->head; p; q = p, p = p->next) //±éÀúÁ´±í
+	for (q = NULL, p = list->head; p; q = p, p = p->next) //éå†é“¾è¡¨
 	{
-		if (!(strcmp(a, p->name) || strcmp(b, p->restaurant))) //ÅĞ¶ÏÊÇ·ñÕÒµ½ÒªÉ¾³ıµÄ½Úµã
+		if (!(strcmp(a, p->name) || strcmp(b, p->restaurant))) //åˆ¤æ–­æ˜¯å¦æ‰¾åˆ°è¦åˆ é™¤çš„èŠ‚ç‚¹
 		{
-			n++; //¼ÇÂ¼ÕÒµ½
-			printf("\nÔ­À´µÄ²ËÆ·ĞÅÏ¢:\n");
-			printf("|²ËÃû:%s\n", p->name);
-			printf("|ËùÊô:%s\n", p->restaurant);
-			printf("|¼Û¸ñ:%.2f\n", p->price);
-			printf("|ÆÀ·Ö:%d\n", p->fraction);
-			printf("|ÆÀ¼Û:%s\n", p->comment);
+			n++; //è®°å½•æ‰¾åˆ°
+			printf("\nåŸæ¥çš„èœå“ä¿¡æ¯:\n");
+			printf("|èœå:%s\n", p->name);
+			printf("|æ‰€å±:%s\n", p->restaurant);
+			printf("|ä»·æ ¼:%.2f\n", p->price);
+			printf("|è¯„åˆ†:%d\n", p->fraction);
+			printf("|è¯„ä»·:%s\n", p->comment);
 			printf("\n");
-			puts("ÇëĞŞ¸Ä²ËÆ·µÄ¼Û¸ñ£º");
+			puts("è¯·ä¿®æ”¹èœå“çš„ä»·æ ¼ï¼š");
 			p->price = get_float();
-			puts("ÇëÊäÈë0-10µÄÕûÊıÒÔĞŞ¸Ä²ËÆ·µÄÆÀ·Ö£º");
+			puts("è¯·è¾“å…¥0-10çš„æ•´æ•°ä»¥ä¿®æ”¹èœå“çš„è¯„åˆ†ï¼š");
 			do
 			{
 				m = get_int();
@@ -449,11 +449,11 @@ void revise(List *list) //ĞŞ¸Ä½Úµã
 				else
 				{
 					color(12);
-					puts("ÆÀ·Ö²»ÔÚ¹æ¶¨·¶Î§ÄÚ£¬ÇëÖØĞÂÊäÈë£º");
+					puts("è¯„åˆ†ä¸åœ¨è§„å®šèŒƒå›´å†…ï¼Œè¯·é‡æ–°è¾“å…¥ï¼š");
 					color(15);
 				}
 			} while (!i);
-			puts("ÇëĞŞ¸Ä¶Ô²ËÆ·µÄÆÀ¼Û£º");
+			puts("è¯·ä¿®æ”¹å¯¹èœå“çš„è¯„ä»·ï¼š");
 			do
 			{
 				s_gets(p->comment, SIZE2);
@@ -462,33 +462,33 @@ void revise(List *list) //ĞŞ¸Ä½Úµã
 	}
 	if (n)
 	{
-		printf("\nĞŞ¸ÄÍê³É¡£\n");
+		printf("\nä¿®æ”¹å®Œæˆã€‚\n");
 	}
 	else
 	{
-		printf("\nÃ»ÓĞÕâµÀ²Ë£¡\n");
+		printf("\næ²¡æœ‰è¿™é“èœï¼\n");
 	}
 	color(11);
 	system("pause");
 }
-//°²È«ÊäÈë
-char *s_gets(char *m, int n) //°²È«ÊäÈë×Ö·û
+//å®‰å…¨è¾“å…¥
+char *s_gets(char *m, int n) //å®‰å…¨è¾“å…¥å­—ç¬¦
 {
 	char *p;
 	char *find;
 	p = fgets(m, n, stdin);
 	if (p)
 	{
-		find = strchr(m, '\n'); //²éÕÒ»»ĞĞ·û
-		if (find)				//Èç¹ûµØÖ·²»ÊÇNULL
-			*find = '\0';		//ÔÚ´Ë´¦·ÅÒ»¸ö¿Õ×Ö·û
+		find = strchr(m, '\n'); //æŸ¥æ‰¾æ¢è¡Œç¬¦
+		if (find)				//å¦‚æœåœ°å€ä¸æ˜¯NULL
+			*find = '\0';		//åœ¨æ­¤å¤„æ”¾ä¸€ä¸ªç©ºå­—ç¬¦
 		else
 			while (getchar() != '\n')
 				continue;
 	}
 	return p;
 }
-int get_int() //°²È«ÊäÈëintĞÍ
+int get_int() //å®‰å…¨è¾“å…¥intå‹
 {
 	int n;
 	char ch;
@@ -497,21 +497,21 @@ int get_int() //°²È«ÊäÈëintĞÍ
 		while ((ch = getchar()) != '\n')
 			putchar(ch);
 		color(4);
-		printf(" ²»ÊÇÒ»¸öÕıÕûÊı£¡\nÇëÄúÖØĞÂÊäÈë£º\n");
+		printf(" ä¸æ˜¯ä¸€ä¸ªæ­£æ•´æ•°ï¼\nè¯·æ‚¨é‡æ–°è¾“å…¥ï¼š\n");
 		color(15);
 	}
 	return n;
 }
-float get_float() //°²È«ÊäÈëfloatĞÍ
+float get_float() //å®‰å…¨è¾“å…¥floatå‹
 {
 	float n = 1;
 	char ch;
 	do
 	{
 		if (n <= 0)
-		{ //ÓÃ»§ÊäÈë²»ÊÇÕıÊıÊä³öÌáÊ¾
+		{ //ç”¨æˆ·è¾“å…¥ä¸æ˜¯æ­£æ•°è¾“å‡ºæç¤º
 			color(12);
-			puts("ÇëÖØĞÂÊäÈëÒ»¸öÕıÊı£¡");
+			puts("è¯·é‡æ–°è¾“å…¥ä¸€ä¸ªæ­£æ•°ï¼");
 			color(15);
 		}
 		while (scanf("%f%*c", &n) != 1)
@@ -519,125 +519,125 @@ float get_float() //°²È«ÊäÈëfloatĞÍ
 			while ((ch = getchar()) != '\n')
 				putchar(ch);
 			color(12);
-			printf(" ²»ÊÇÒ»¸öÕıÊı£¡\nÇëÄúÖØĞÂÊäÈë£º\n");
+			printf(" ä¸æ˜¯ä¸€ä¸ªæ­£æ•°ï¼\nè¯·æ‚¨é‡æ–°è¾“å…¥ï¼š\n");
 			color(15);
 		}
 	} while (n <= 0);
 	return n;
 }
-//Á´±íµÄÊä³öºÍ²Ù×÷
-void inquire_all(List *list) //Êä³öÁ´±íÈ«²¿½Úµã
+//é“¾è¡¨çš„è¾“å‡ºå’Œæ“ä½œ
+void inquire_all(List *list) //è¾“å‡ºé“¾è¡¨å…¨éƒ¨èŠ‚ç‚¹
 {
 	Node *p;
 	int n = 1;
 	system("cls");
-	for (p = list->head; p; p = p->next) //±éÀúÁ´±í
+	for (p = list->head; p; p = p->next) //éå†é“¾è¡¨
 	{
-		printf("\nµÚ%dµÀ²Ë:", n);
+		printf("\nç¬¬%dé“èœ:", n);
 		output(p);
 		n++;
 	}
 	color(11);
-	printf("\nËùÓĞ²ËÆ·²éÑ¯Íê±Ï\n");
+	printf("\næ‰€æœ‰èœå“æŸ¥è¯¢å®Œæ¯•\n");
 	system("pause");
 }
-void inquire_one(List *list) //Êä³öÖ¸¶¨²ËÃû
+void inquire_one(List *list) //è¾“å‡ºæŒ‡å®šèœå
 {
 	int n = 0;
 	char a[SIZE1];
 	Node *p;
 	system("cls");
-	printf("ÇëÊäÈëÄãÒªÕÒµÄ²ËÆ·Ãû³Æ£º");
+	printf("è¯·è¾“å…¥ä½ è¦æ‰¾çš„èœå“åç§°ï¼š");
 	s_gets(a, SIZE1);
-	for (p = list->head; p; p = p->next) //±éÀúÁ´±í
+	for (p = list->head; p; p = p->next) //éå†é“¾è¡¨
 	{
-		if (!strcmp(a, p->name)) //ÅĞ¶ÏÊÇ·ñÕÒµ½
+		if (!strcmp(a, p->name)) //åˆ¤æ–­æ˜¯å¦æ‰¾åˆ°
 		{
-			output(p); //µ÷ÓÃº¯ÊıÊä³ö½ÚµãĞÅÏ¢
-			n++;	   //¼ÇÂ¼ÕÒµ½¶àÉÙ½Úµã
+			output(p); //è°ƒç”¨å‡½æ•°è¾“å‡ºèŠ‚ç‚¹ä¿¡æ¯
+			n++;	   //è®°å½•æ‰¾åˆ°å¤šå°‘èŠ‚ç‚¹
 		}
 	}
 	color(11);
-	printf("\n¹²²éÕÒµ½%dµÀ²Ë\n", n);
+	printf("\nå…±æŸ¥æ‰¾åˆ°%dé“èœ\n", n);
 	system("pause");
 }
-void inquire_restaurant(List *list) //Êä³öÖ¸¶¨·¹µêËùÓĞ²ËÆ·
+void inquire_restaurant(List *list) //è¾“å‡ºæŒ‡å®šé¥­åº—æ‰€æœ‰èœå“
 {
 	int n = 0;
 	char a[SIZE1];
 	Node *p;
 	system("cls");
-	printf("ÇëÊäÈëÄãÒªÕÒµÄ·¹µê»òÊ³ÌÃ£º");
+	printf("è¯·è¾“å…¥ä½ è¦æ‰¾çš„é¥­åº—æˆ–é£Ÿå ‚ï¼š");
 	s_gets(a, SIZE1);
-	for (p = list->head; p; p = p->next) //±éÀúÁ´±í
+	for (p = list->head; p; p = p->next) //éå†é“¾è¡¨
 	{
-		if (!strcmp(a, p->restaurant)) //ÅĞ¶ÏÊÇ·ñÕÒµ½
+		if (!strcmp(a, p->restaurant)) //åˆ¤æ–­æ˜¯å¦æ‰¾åˆ°
 		{
-			output(p); //µ÷ÓÃº¯ÊıÊä³ö½ÚµãĞÅÏ¢
-			n++;	   //¼ÇÂ¼ÕÒµ½¶àÉÙ½Úµã
+			output(p); //è°ƒç”¨å‡½æ•°è¾“å‡ºèŠ‚ç‚¹ä¿¡æ¯
+			n++;	   //è®°å½•æ‰¾åˆ°å¤šå°‘èŠ‚ç‚¹
 		}
 	}
 	color(11);
-	printf("\n¹²²éÕÒµ½%dµÀ²Ë\n", n);
+	printf("\nå…±æŸ¥æ‰¾åˆ°%dé“èœ\n", n);
 	system("pause");
 }
-void inquire_part_price(List *list) //Êä³öÒ»¶¨¼Û¸ñÒÔÏÂµÄ²ËÆ·(Õâ¹¦ÄÜ¡£¡£Æ¶Çî)
+void inquire_part_price(List *list) //è¾“å‡ºä¸€å®šä»·æ ¼ä»¥ä¸‹çš„èœå“(è¿™åŠŸèƒ½ã€‚ã€‚è´«ç©·)
 {
 	int n = 0;
 	float money, k = 1;
 	char a[SIZE1];
 	Node *p;
 	system("cls");
-	printf("ÇëÊäÈë·â¶¥¼Û¸ñ£º");
+	printf("è¯·è¾“å…¥å°é¡¶ä»·æ ¼ï¼š");
 	money = get_float();
-	for (p = list->head; p; p = p->next) //±éÀúÁ´±í
+	for (p = list->head; p; p = p->next) //éå†é“¾è¡¨
 	{
-		if (p->price <= money) //ÅĞ¶ÏÊÇ·ñ·ûºÏÒªÇó
+		if (p->price <= money) //åˆ¤æ–­æ˜¯å¦ç¬¦åˆè¦æ±‚
 		{
-			output(p); //µ÷ÓÃº¯ÊıÊä³ö½ÚµãĞÅÏ¢
-			n++;	   //¼ÇÂ¼ÕÒµ½¶àÉÙ½Úµã
+			output(p); //è°ƒç”¨å‡½æ•°è¾“å‡ºèŠ‚ç‚¹ä¿¡æ¯
+			n++;	   //è®°å½•æ‰¾åˆ°å¤šå°‘èŠ‚ç‚¹
 		}
 	}
 	color(11);
-	printf("\n¹²²éÕÒµ½%dµÀ²Ë\n", n);
+	printf("\nå…±æŸ¥æ‰¾åˆ°%dé“èœ\n", n);
 	system("pause");
 }
-void inquire_part_fraction(List *list) //Êä³öÒ»¶¨ÆÀ·ÖÒÔÉÏµÄ²ËÆ·
+void inquire_part_fraction(List *list) //è¾“å‡ºä¸€å®šè¯„åˆ†ä»¥ä¸Šçš„èœå“
 {
 	int n = 0;
 	int score;
 	char a[SIZE1];
 	Node *p;
 	system("cls");
-	printf("ÇëÊäÈë×îµÍÆÀ·Ö£º");
+	printf("è¯·è¾“å…¥æœ€ä½è¯„åˆ†ï¼š");
 	score = get_int();
-	for (p = list->head; p; p = p->next) //±éÀúÁ´±í
+	for (p = list->head; p; p = p->next) //éå†é“¾è¡¨
 	{
-		if (p->fraction >= score) //ÅĞ¶ÏÊÇ·ñ·ûºÏÒªÇó
+		if (p->fraction >= score) //åˆ¤æ–­æ˜¯å¦ç¬¦åˆè¦æ±‚
 		{
-			output(p); //µ÷ÓÃº¯ÊıÊä³ö½ÚµãĞÅÏ¢
-			n++;	   //¼ÇÂ¼ÕÒµ½¶àÉÙ½Úµã
+			output(p); //è°ƒç”¨å‡½æ•°è¾“å‡ºèŠ‚ç‚¹ä¿¡æ¯
+			n++;	   //è®°å½•æ‰¾åˆ°å¤šå°‘èŠ‚ç‚¹
 		}
 	}
-	printf("\n¹²²éÕÒµ½%dµÀ²Ë\n", n);
+	printf("\nå…±æŸ¥æ‰¾åˆ°%dé“èœ\n", n);
 	color(11);
 	system("pause");
 }
-void average_percentage(List *list) //²éÑ¯Ä³·¹µê»òÊ³ÌÃµÄÆ½¾ù¼Û¸ñºÍÆÀ·Ö
+void average_percentage(List *list) //æŸ¥è¯¢æŸé¥­åº—æˆ–é£Ÿå ‚çš„å¹³å‡ä»·æ ¼å’Œè¯„åˆ†
 {
 	int n = 0;
 	float sum1 = 0, sum2 = 0, b[5] = {0};
 	char a[SIZE1];
 	Node *p;
 	system("cls");
-	printf("ÇëÊäÈëÄãÒª²éµÄ·¹µê»òÊ³ÌÃ£º");
+	printf("è¯·è¾“å…¥ä½ è¦æŸ¥çš„é¥­åº—æˆ–é£Ÿå ‚ï¼š");
 	s_gets(a, SIZE1);
-	for (p = list->head; p; p = p->next) //±éÀúÁ´±í
+	for (p = list->head; p; p = p->next) //éå†é“¾è¡¨
 	{
-		if (!strcmp(a, p->restaurant)) //ÅĞ¶ÏÊÇ·ñÕÒµ½
+		if (!strcmp(a, p->restaurant)) //åˆ¤æ–­æ˜¯å¦æ‰¾åˆ°
 		{
-			sum1 += p->price;	 //ÀÛ¼Ó¼Û¸ñ
-			sum2 += p->fraction; //ÀÛ¼ÓÆÀ·Ö
+			sum1 += p->price;	 //ç´¯åŠ ä»·æ ¼
+			sum2 += p->fraction; //ç´¯åŠ è¯„åˆ†
 			if (p->price <= 5)
 			{
 				b[0]++;
@@ -667,50 +667,50 @@ void average_percentage(List *list) //²éÑ¯Ä³·¹µê»òÊ³ÌÃµÄÆ½¾ù¼Û¸ñºÍÆÀ·Ö
 					}
 				}
 			}
-			n++; //¼ÇÂ¼ÕÒµ½¶àÉÙ½Úµã
+			n++; //è®°å½•æ‰¾åˆ°å¤šå°‘èŠ‚ç‚¹
 		}
 	}
 	color(11);
 	if (n)
 	{
-		printf("¸Ã·¹µê/Ê³ÌÃµÄÒ»¹²ÓĞ%dµÀ²Ë\nÆ½¾ù¼Û¸ñÊÇ£º%.2f\tÆ½¾ùÆÀ·ÖÊÇ£º%.2f\n", n, sum1 / n, sum2 / n);
-		printf("ÆäÖĞ£º\n0~5ÔªÕ¼:%.1f%%\n5~10ÔªÕ¼:%.1f%%\n10~15ÔªÕ¼:%.1f%%\n", b[0] / n * 100, b[1] / n * 100, b[2] / n * 100);
-		printf("15~20ÔªÕ¼:%.1f%%\n20ÔªÒÔÉÏÕ¼:%.1f%%\n\n", b[3] / n * 100, b[4] / n * 100);
+		printf("è¯¥é¥­åº—/é£Ÿå ‚çš„ä¸€å…±æœ‰%dé“èœ\nå¹³å‡ä»·æ ¼æ˜¯ï¼š%.2f\tå¹³å‡è¯„åˆ†æ˜¯ï¼š%.2f\n", n, sum1 / n, sum2 / n);
+		printf("å…¶ä¸­ï¼š\n0~5å…ƒå :%.1f%%\n5~10å…ƒå :%.1f%%\n10~15å…ƒå :%.1f%%\n", b[0] / n * 100, b[1] / n * 100, b[2] / n * 100);
+		printf("15~20å…ƒå :%.1f%%\n20å…ƒä»¥ä¸Šå :%.1f%%\n\n", b[3] / n * 100, b[4] / n * 100);
 	}
 	else
 	{
 		color(12);
-		printf("ÎŞ¸Ã·¹µê»òÊ³ÌÃ£¡\n\n");
+		printf("æ— è¯¥é¥­åº—æˆ–é£Ÿå ‚ï¼\n\n");
 	}
 	color(11);
 	system("pause");
 }
-void output(Node *p) //·½±ãÊä³ö
+void output(Node *p) //æ–¹ä¾¿è¾“å‡º
 {
-	printf("\n|²ËÃû:%s\n", p->name);
-	printf("|ËùÊô:%s\n", p->restaurant);
-	printf("|¼Û¸ñ:%.2f\n", p->price);
-	printf("|ÆÀ·Ö:%d\n", p->fraction);
-	printf("|ÆÀ¼Û:%s\n", p->comment);
+	printf("\n|èœå:%s\n", p->name);
+	printf("|æ‰€å±:%s\n", p->restaurant);
+	printf("|ä»·æ ¼:%.2f\n", p->price);
+	printf("|è¯„åˆ†:%d\n", p->fraction);
+	printf("|è¯„ä»·:%s\n", p->comment);
 }
-void random_menu(List *list) //Ëæ»úÊä³öÒ»µÀ²Ë
+void random_menu(List *list) //éšæœºè¾“å‡ºä¸€é“èœ
 {
 	system("cls");
-	if (list->head == NULL) //ÅĞ¶ÏÁ´±íÊÇ·ñÎª¿Õ
+	if (list->head == NULL) //åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©º
 	{
 		color(12);
-		printf("»¹Î´´æÈëÈÎºÎ²ËÆ·£¡\n");
+		printf("è¿˜æœªå­˜å…¥ä»»ä½•èœå“ï¼\n");
 		color(11);
 		system("pause");
 		return;
 	}
 	List *q = list;
 	Node *p = list->head;
-	int n = random_number(q), i = 1; //½«Ëæ»ú³öÀ´µÄÊı¸³Óèn£¬²¢³õÊ¼iµÈÓÚµÚÒ»µÀ²Ë£¬ÅĞ¶ÏÊı×ÖÊÇ·ñÏàµÈ£¬¼´¿ÉÕÒµ½ÄÇ¸öËæ»ú³öÀ´µÄ²Ë
+	int n = random_number(q), i = 1; //å°†éšæœºå‡ºæ¥çš„æ•°èµ‹äºˆnï¼Œå¹¶åˆå§‹iç­‰äºç¬¬ä¸€é“èœï¼Œåˆ¤æ–­æ•°å­—æ˜¯å¦ç›¸ç­‰ï¼Œå³å¯æ‰¾åˆ°é‚£ä¸ªéšæœºå‡ºæ¥çš„èœ
 	while (p != NULL)
 	{
 
-		if (i == n) //½èÖúËæ»úÊıÀ´Ëæ»úÊä³ö²Ë
+		if (i == n) //å€ŸåŠ©éšæœºæ•°æ¥éšæœºè¾“å‡ºèœ
 		{
 			output(p);
 			color(11);
@@ -721,37 +721,37 @@ void random_menu(List *list) //Ëæ»úÊä³öÒ»µÀ²Ë
 		p = p->next;
 	}
 }
-void empty(List *list) //Çå¿ÕÁ´±í
+void empty(List *list) //æ¸…ç©ºé“¾è¡¨
 {
 	Node *p, *q;
 	int n;
 	system("cls");
 	color(12);
-	printf("´Ë²Ù×÷½«Çå¿ÕËùÓĞÊı¾İ£¡\nÊäÈë 1 ¼ÌĞø£¬ÊäÈë 0 È¡Ïû£º\n");
+	printf("æ­¤æ“ä½œå°†æ¸…ç©ºæ‰€æœ‰æ•°æ®ï¼\nè¾“å…¥ 1 ç»§ç»­ï¼Œè¾“å…¥ 0 å–æ¶ˆï¼š\n");
 	do
 	{
 		n = get_int();
 	} while (!(n == 0 || n == 1));
 	if (n == 1)
 	{
-		for (p = list->head; p; p = q) //±éÀúÁ´±í
+		for (p = list->head; p; p = q) //éå†é“¾è¡¨
 		{
 			q = p->next;
 			free(p);
 		}
 		list->head = NULL;
-		printf("Çå³ıÍê³É£¡\n");
+		printf("æ¸…é™¤å®Œæˆï¼\n");
 		system("pause");
 		return;
 	}
 }
-//ÎÄ¼ş²Ù×÷
-void save(List *list) //±£´æ
+//æ–‡ä»¶æ“ä½œ
+void save(List *list) //ä¿å­˜
 {
 	if (list->head == NULL)
 	{
 		color(12);
-		printf("»¹Î´´æÈëÈÎºÎ²ËÆ·£¡±£´æÎª¿Õ£¡\n");
+		printf("è¿˜æœªå­˜å…¥ä»»ä½•èœå“ï¼ä¿å­˜ä¸ºç©ºï¼\n");
 		color(11);
 		system("pause");
 		return;
@@ -767,16 +767,16 @@ void save(List *list) //±£´æ
 		}
 		fclose(fp);
 		color(11);
-		printf("\n±£´æ³É¹¦\n");
+		printf("\nä¿å­˜æˆåŠŸ\n");
 		system("pause");
 	}
 	else
 	{
 		color(12);
-		printf("±£´æÊ§°Ü£¬Çë×Ô²é»òÁªÏµ×÷Õß");
+		printf("ä¿å­˜å¤±è´¥ï¼Œè¯·è‡ªæŸ¥æˆ–è”ç³»ä½œè€…");
 	}
 }
-void read_txt(List *list) //¶ÁÈ¡ÎÄ¼ş_³õÊ¼Á´±í
+void read_txt(List *list) //è¯»å–æ–‡ä»¶_åˆå§‹é“¾è¡¨
 {
 	int i = 1;
 	Node *last;
@@ -784,8 +784,8 @@ void read_txt(List *list) //¶ÁÈ¡ÎÄ¼ş_³õÊ¼Á´±í
 	int a = 1;
 	char f[5];
 	FILE *fp = fopen("Menu.txt", "r");
-	fgets(f, 10, fp); //¶ÁÈ¡µÚÒ»ĞĞ£¬²¢½øÈëÏÂÒ»ĞĞ£¬·ÀÖ¹bug
-	while (!feof(fp)) //µ±¶ÁÈ¡µ½ÎÄ¼ş½áÊø·ûÌø³öÑ­»·½áÊø¶ÁÈ¡
+	fgets(f, 10, fp); //è¯»å–ç¬¬ä¸€è¡Œï¼Œå¹¶è¿›å…¥ä¸‹ä¸€è¡Œï¼Œé˜²æ­¢bug
+	while (!feof(fp)) //å½“è¯»å–åˆ°æ–‡ä»¶ç»“æŸç¬¦è·³å‡ºå¾ªç¯ç»“æŸè¯»å–
 	{
 		last = list->head;
 		p1 = (Node *)malloc(sizeof(Node));
@@ -806,8 +806,8 @@ void read_txt(List *list) //¶ÁÈ¡ÎÄ¼ş_³õÊ¼Á´±í
 	}
 	fclose(fp);
 }
-//µ¥Á´±íµÄÃ°ÅİÅÅĞò£¬ÕâÖ¸À´Ö¸È¥£¬×÷ÕßÒ»¿ÚÆøĞ´Íêµ½¶ÏÆøµÄ£¬²»Ïë¼Ó×¢ÊÍÁË£¬Ó¦¸Ã»áÓĞ¸üºÃµÄËã·¨£¬¹¾¹¾¹¾£¬ÒÔºóÓÅ»¯
-void sort_ascending(List *list) //²ËÆ·°´¼Û¸ñ´ÓµÍµ½¸ßÅÅĞò
+//å•é“¾è¡¨çš„å†’æ³¡æ’åºï¼Œè¿™æŒ‡æ¥æŒ‡å»ï¼Œä½œè€…ä¸€å£æ°”å†™å®Œåˆ°æ–­æ°”çš„ï¼Œä¸æƒ³åŠ æ³¨é‡Šäº†ï¼Œåº”è¯¥ä¼šæœ‰æ›´å¥½çš„ç®—æ³•ï¼Œå’•å’•å’•ï¼Œä»¥åä¼˜åŒ–
+void sort_ascending(List *list) //èœå“æŒ‰ä»·æ ¼ä»ä½åˆ°é«˜æ’åº
 {
 	int n = 0, i, k, num;
 	List *p = list;
@@ -819,9 +819,9 @@ void sort_ascending(List *list) //²ËÆ·°´¼Û¸ñ´ÓµÍµ½¸ßÅÅĞò
 	list_swap.pc = p3;
 	for (i = 0; i < n - 1; i++)
 	{
-		list_swap.pa = list->head;		   //µ±Ç°
-		list_swap.pb = NULL;			   //Ç°Ò»¸ö
-		list_swap.pc = list_swap.pa->next; //ÏÂÒ»¸ö
+		list_swap.pa = list->head;		   //å½“å‰
+		list_swap.pb = NULL;			   //å‰ä¸€ä¸ª
+		list_swap.pc = list_swap.pa->next; //ä¸‹ä¸€ä¸ª
 		for (k = 0; k < n - i - 1; k++)
 		{
 			if (list_swap.pa->price > list_swap.pc->price)
@@ -835,7 +835,7 @@ void sort_ascending(List *list) //²ËÆ·°´¼Û¸ñ´ÓµÍµ½¸ßÅÅĞò
 		}
 	}
 }
-void sort_descending(List *list) //²ËÆ·°´¼Û¸ñ´Ó¸ßµ½µÍÅÅĞò
+void sort_descending(List *list) //èœå“æŒ‰ä»·æ ¼ä»é«˜åˆ°ä½æ’åº
 {
 	int n = 0, i, k, num;
 	List *p = list;
@@ -847,9 +847,9 @@ void sort_descending(List *list) //²ËÆ·°´¼Û¸ñ´Ó¸ßµ½µÍÅÅĞò
 	list_swap.pc = p3;
 	for (i = 0; i < n - 1; i++)
 	{
-		list_swap.pa = list->head;		   //µ±Ç°
-		list_swap.pb = NULL;			   //Ç°Ò»¸ö
-		list_swap.pc = list_swap.pa->next; //ÏÂÒ»¸ö
+		list_swap.pa = list->head;		   //å½“å‰
+		list_swap.pb = NULL;			   //å‰ä¸€ä¸ª
+		list_swap.pc = list_swap.pa->next; //ä¸‹ä¸€ä¸ª
 		for (k = 0; k < n - i - 1; k++)
 		{
 			if (list_swap.pa->price < list_swap.pc->price)
@@ -863,7 +863,7 @@ void sort_descending(List *list) //²ËÆ·°´¼Û¸ñ´Ó¸ßµ½µÍÅÅĞò
 		}
 	}
 }
-void sort_score(List *list) //²ËÆ·°´ÆÀ·Ö´Ó¸ßµ½µÍÅÅĞò
+void sort_score(List *list) //èœå“æŒ‰è¯„åˆ†ä»é«˜åˆ°ä½æ’åº
 {
 	int n = 0, i, k, num;
 	List *p = list;
@@ -875,9 +875,9 @@ void sort_score(List *list) //²ËÆ·°´ÆÀ·Ö´Ó¸ßµ½µÍÅÅĞò
 	list_swap.pc = p3;
 	for (i = 0; i < n - 1; i++)
 	{
-		list_swap.pa = list->head;		   //µ±Ç°
-		list_swap.pb = NULL;			   //Ç°Ò»¸ö
-		list_swap.pc = list_swap.pa->next; //ÏÂÒ»¸ö
+		list_swap.pa = list->head;		   //å½“å‰
+		list_swap.pb = NULL;			   //å‰ä¸€ä¸ª
+		list_swap.pc = list_swap.pa->next; //ä¸‹ä¸€ä¸ª
 		for (k = 0; k < n - i - 1; k++)
 		{
 			if (list_swap.pa->fraction < list_swap.pc->fraction)
@@ -891,7 +891,7 @@ void sort_score(List *list) //²ËÆ·°´ÆÀ·Ö´Ó¸ßµ½µÍÅÅĞò
 		}
 	}
 }
-int calculate(List *list) //¼ÆËã³öµ¥Á´±íµÄ½Úµã¸öÊı
+int calculate(List *list) //è®¡ç®—å‡ºå•é“¾è¡¨çš„èŠ‚ç‚¹ä¸ªæ•°
 {
 	int n = 0;
 	Node *p = list->head;
@@ -902,7 +902,7 @@ int calculate(List *list) //¼ÆËã³öµ¥Á´±íµÄ½Úµã¸öÊı
 	}
 	return n + 1;
 }
-void swap1(List *list, List *list_swap) //µ¥Á´±íÃ°ÅİÅÅĞòµÄËã·¨¿é1
+void swap1(List *list, List *list_swap) //å•é“¾è¡¨å†’æ³¡æ’åºçš„ç®—æ³•å—1
 {
 	if (list_swap->pb)
 	{
@@ -919,7 +919,7 @@ void swap1(List *list, List *list_swap) //µ¥Á´±íÃ°ÅİÅÅĞòµÄËã·¨¿é1
 	list_swap->pb = list_swap->pc;
 	list_swap->pc = list_swap->pa->next;
 }
-void swap2(List *list, List *list_swap) //µ¥Á´±íÃ°ÅİÅÅĞòµÄËã·¨¿é2
+void swap2(List *list, List *list_swap) //å•é“¾è¡¨å†’æ³¡æ’åºçš„ç®—æ³•å—2
 {
 	if (list_swap->pb)
 	{
@@ -934,8 +934,8 @@ void swap2(List *list, List *list_swap) //µ¥Á´±íÃ°ÅİÅÅĞòµÄËã·¨¿é2
 		list_swap->pb = list->head;
 	}
 }
-//ÆäËû
-int random_number(List *list) //Ëæ»úÉú³É²»´óÓÚ½ÚµãÊıµÄÕûÊı
+//å…¶ä»–
+int random_number(List *list) //éšæœºç”Ÿæˆä¸å¤§äºèŠ‚ç‚¹æ•°çš„æ•´æ•°
 {
 	int n = 0, m = 0, sum = 1, i = 0;
 	List *q = list;
@@ -958,7 +958,7 @@ int random_number(List *list) //Ëæ»úÉú³É²»´óÓÚ½ÚµãÊıµÄÕûÊı
 	}
 	return i;
 }
-void color(int a) //¿ØÖÆÌ¨ÎÄ±¾ÑÕÉ«
+void color(int a) //æ§åˆ¶å°æ–‡æœ¬é¢œè‰²
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), a); //¸ü¸Ä¿ØÖÆÌ¨ÎÄ×ÖÑÕÉ«
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), a); //æ›´æ”¹æ§åˆ¶å°æ–‡å­—é¢œè‰²
 }
